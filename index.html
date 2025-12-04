@@ -8,13 +8,18 @@
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;500&display=swap");
 
-    /* ----- Общие ----- */
+    /* ----- Общие параметры ----- */
     body {
       margin: 0;
       font-family: "Roboto", sans-serif;
       color: #f5f5f5;
-      background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.7)),
-                  url("los-santos-neon.jpg") center top / cover no-repeat;
+
+      background: linear-gradient(
+          rgba(0, 0, 0, 0.45),
+          rgba(0, 0, 0, 0.7)
+        ),
+        url("los-santos-neon.jpg") no-repeat top center / cover;
+
       background-attachment: fixed;
       overflow-x: hidden;
       transition: background-position 0.3s ease-out;
@@ -23,7 +28,7 @@
 
     *, *::before, *::after { box-sizing: inherit; }
 
-    /* Мобильный фон */
+    /* ----- мобильный фон ----- */
     .mobile-bg {
       display: none;
       position: fixed;
@@ -35,11 +40,11 @@
     }
 
     /* ---------------------------------------------------------
-               📱 МОБИЛЬНАЯ ВЕРСИЯ
+          📱 МОБИЛЬНАЯ ВЕРСИЯ
        --------------------------------------------------------- */
     @media (max-width: 768px) {
 
-      html, body { overflow-x: hidden !important; }
+      html, body { overflow-x: hidden !important; width:100% !important; }
 
       body {
         background: none !important;
@@ -47,16 +52,24 @@
       }
 
       .mobile-bg {
-        display: block;
+        display:block;
         background-image: url("combined_reversed.jpg");
       }
 
-      header { padding: 80px 12px !important; text-align:center !important; }
+      header {
+        padding: 80px 12px !important;
+        text-align:center !important;
+        width:100% !important;
+      }
 
-      header p { margin: 0 auto 8px auto !important; }
+      header p {
+        margin: 0 auto 8px auto !important;
+        text-align:center !important;
+      }
 
       header h1 {
         font-size: clamp(28px, 10.5vw, 48px) !important;
+        line-height: 1.05 !important;
         margin: 0 auto !important;
       }
 
@@ -68,25 +81,49 @@
 
       .services {
         flex-direction:column !important;
-        gap:18px !important;
         align-items:center !important;
+        gap:18px !important;
+        width:100% !important;
+      }
+
+      .service-card {
+        width:94% !important;
+        max-width:420px !important;
+        text-align:center !important;
+        padding:18px !important;
       }
 
       /* Мобильная карта */
       #map-mobile {
         display: block !important;
         width: 100%;
+        max-width: 100%;
         margin: 20px auto;
         border-radius: 12px;
-        aspect-ratio: 3/4;
         overflow: hidden;
+        aspect-ratio: 3 / 4;
       }
 
-      #map-mobile iframe { width: 100%; height: 100%; border: 0; }
+      #map-mobile iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
 
       /* Прячем ПК-карту */
-      #map-desktop { display: none !important; }
-      /* Красивое оформление контактов на мобильной версии */
+      #map-desktop {
+        display: none !important;
+      }
+      /* ВОССТАНОВЛЕНИЕ ЦЕНТРА ДЛЯ ПК */
+@media (min-width: 769px) {
+  .contact,
+  .contact p,
+  .contact a,
+  .hours {
+    text-align: center !important;
+  }
+}
+/* Красивое оформление контактов на мобильной версии */
 @media (max-width: 768px) {
 
   .contact {
@@ -126,20 +163,17 @@
 }
 
     }
-
-    /* ---------------------------------------------------------
-               🖥️ ПК ВОССТАНОВЛЕНИЕ ВЫРАВНИВАНИЯ
-       --------------------------------------------------------- */
-    @media (min-width: 769px) {
-      .contact,
-      .contact p,
-      .contact a,
-      .hours {
-        text-align: center !important;
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
+/* ВОССТАНОВЛЕНИЕ ЦЕНТРА ДЛЯ ПК */
+@media (min-width: 769px) {
+  .contact,
+  .contact p,
+  .contact a,
+  .hours {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
 
     /* ----- HEADER ----- */
     header {
@@ -151,20 +185,21 @@
       letter-spacing: 6px;
       text-transform: uppercase;
       color: #ddd;
-      opacity: 0;
       margin-top: 10px;
+      font-size: 15px;
+      opacity: 0;
       animation: fadeIn 1.5s ease forwards 0.8s;
     }
 
     header h1 {
       font-family: "Orbitron", sans-serif;
       font-size: 90px;
-      color: #fff;
       margin: 0;
       letter-spacing: 3px;
       opacity: 0;
       transform: translateY(40px);
       animation: slideUpFade 1.6s ease forwards;
+      color: #fff;
       text-shadow: 0 0 25px #ff0000;
     }
 
@@ -178,7 +213,7 @@
       100% { opacity: 1; }
     }
 
-    /* ----- Ключ ----- */
+    /* ----- Анимация ключа ----- */
     .wrench-animation {
       margin-top: 100px;
       width: 200px;
@@ -192,11 +227,20 @@
       animation: glowPulse 3s ease-in-out infinite;
     }
 
-    .wrench img { width: 100%; height: 100%; object-fit: contain; }
+    .wrench {
+      animation: spin 6s linear infinite;
+    }
 
-    @keyframes spin { from { rotate:0deg; } to { rotate:360deg; } }
+    .wrench img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
-    .wrench { animation: spin 6s linear infinite; }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
     /* ----- Sections ----- */
     section {
@@ -207,6 +251,7 @@
 
     h2 {
       text-align: center;
+      color: #fff;
       font-family: "Orbitron", sans-serif;
       font-size: 32px;
       margin-bottom: 40px;
@@ -218,6 +263,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 25px;
+      width: 100%;
     }
 
     .service-card {
@@ -226,17 +272,21 @@
       border-radius: 12px;
       width: 300px;
       padding: 25px;
+      text-align: left;
       box-shadow: 0 0 15px rgba(255,0,0,0.3);
       transition: 0.3s ease;
     }
 
     .service-card:hover {
       transform: translateY(-6px);
-      background-color: rgba(34,34,34,0.7);
+      background-color: rgba(34, 34, 34, 0.7);
       box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
     }
 
-    .service-card h3 { color: #ff1a1a; margin-bottom: 15px; }
+    .service-card h3 {
+      color: #ff1a1a;
+      margin-bottom: 15px;
+    }
 
     /* Контакты */
     .contact a {
@@ -245,38 +295,48 @@
       text-shadow: none !important;
     }
 
-    .contact a:hover { color: #ff3a3a !important; }
+    .contact a:hover {
+      color: #ff3a3a !important;
+      text-shadow: none !important;
+    }
 
     /* ПК карта */
     #map-desktop {
       display: block;
       width: 100%;
       max-width: 900px;
+      height: auto;
       margin: 25px auto;
       border-radius: 12px;
-      aspect-ratio: 16/9;
       overflow: hidden;
+      aspect-ratio: 16 / 9;
     }
 
-    #map-desktop iframe { width: 100%; height:100%; border:0; }
+    #map-desktop iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
 
-    /* Мобильная карта скрыта */
-    #map-mobile { display: none; }
+    /* Мобильная карта — скрыта по умолчанию */
+    #map-mobile {
+      display: none;
+    }
 
     footer {
       text-align: center;
-      background: rgba(0,0,0,0.6);
-      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
       color: #ccc;
-      margin-top: 60px;
+      padding: 20px;
       font-size: 14px;
+      margin-top: 60px;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Мобильный фоновый слой -->
+  <!-- 🔥 Мобильный фоновый слой -->
   <div class="mobile-bg"></div>
 
   <header>
@@ -294,17 +354,35 @@
       <h2>НАШИ УСЛУГИ</h2>
 
       <div class="services">
-        <div class="service-card"><h3>Electrical System Repair</h3><p>Профессиональная диагностика и ремонт электрооборудования автомобиля.</p></div>
-        <div class="service-card"><h3>Tire Fitting</h3><p>Быстрая и аккуратная замена и балансировка шин.</p></div>
-        <div class="service-card"><h3>Transmission Service</h3><p>Проверка и обслуживание трансмиссий.</p></div>
-        <div class="service-card"><h3>Engine Diagnostic</h3><p>Полная диагностика двигателя на современном оборудовании.</p></div>
-        <div class="service-card"><h3>Suspension Repair</h3><p>Ремонт и замена элементов подвески.</p></div>
+        <div class="service-card">
+          <h3>Electrical System Repair</h3>
+          <p>Профессиональная диагностика и ремонт электрооборудования автомобиля любой сложности.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Tire Fitting</h3>
+          <p>Быстрая и аккуратная замена и балансировка шин.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Transmission System Service</h3>
+          <p>Проверка, ремонт и обслуживание трансмиссий.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Engine Diagnostic</h3>
+          <p>Полная диагностика двигателя на современном оборудовании.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Suspension Repair</h3>
+          <p>Ремонт и замена элементов подвески.</p>
+        </div>
       </div>
     </section>
 
     <section class="contact">
       <h2>КОНТАКТЫ</h2>
-
       <p>
         Телефон:
         <a href="tel:+31643464292">+31 6 43 46 42 92</a> — мобильный<br />
@@ -322,24 +400,33 @@
         <p>Воскресенье: выходной</p>
       </div>
 
-      <!-- ПК карта -->
+      <!-- 🖥️ ПК карта -->
       <div id="map-desktop">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.373033862048!2d5.247678176626841!3d52.40442297208698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c61777fdc6bf1f%3A0x573dba4a0225fada!2sHefbrugweg%2012%2C%201332%20AN%20Almere%2C%20Netherlands!5e0!3m2!1sru!2snl!4v1706822222222!5m2!1sru!2snl"
-                loading="lazy" allowfullscreen></iframe>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.373033862048!2d5.247678176626841!3d52.40442297208698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c61777fdc6bf1f%3A0x573dba4a0225fada!2sHefbrugweg%2012%2C%201332%20AN%20Almere%2C%20Netherlands!5e0!3m2!1sru!2snl!4v1706822222222!5m2!1sru!2snl"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
       </div>
 
-      <!-- Мобильная карта -->
+      <!-- 📱 Мобильная карта -->
       <div id="map-mobile">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.373033862048!2d5.247678176626841!3d52.40442297208698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c61777fdc6bf1f%3A0x573dba4a0225fada!2sHefbrugweg%2012%2C%201332%20AN%20Almere%2C%20Netherlands!5e0!3m2!1sru!2snl!4v1706822222222!5m2!1sru!2snl"
-                loading="lazy" allowfullscreen></iframe>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.373033862048!2d5.247678176626841!3d52.40442297208698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c61777fdc6bf1f%3A0x573dba4a0225fada!2sHefbrugweg%2012%2C%201332%20AN%20Almere%2C%20Netherlands!5e0!3m2!1sru!2snl!4v1706822222222!5m2!1sru!2snl"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
       </div>
+
     </section>
   </main>
 
-  <footer>© 2025 GRAND THE AUTO | Все права защищены</footer>
+  <footer>
+    © 2025 GRAND THE AUTO | Все права защищены
+  </footer>
 
   <script>
-    // движение фона на ПК
+    /* движение фона на ПК */
     window.addEventListener("scroll", () => {
       const yOffset = window.pageYOffset;
       document.body.style.backgroundPositionY = -(yOffset * 0.2) + "px";

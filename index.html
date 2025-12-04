@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GRAND THE AUTO — Автосервис в Almere</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;500&display=swap");
+
+    /* ----- Общие ----- */
+    body {
+      margin: 0;
+      font-family: "Roboto", sans-serif;
+      color: #f5f5f5;
+      background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.7)),
+                  url("los-santos-neon.jpg") center top / cover no-repeat;
+      background-attachment: fixed;
+      overflow-x: hidden;
+      transition: background-position 0.3s ease-out;
+      box-sizing: border-box;
+    }
+
+    *, *::before, *::after { box-sizing: inherit; }
+
+    /* Мобильный фон */
+    .mobile-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* ---------------------------------------------------------
+               📱 МОБИЛЬНАЯ ВЕРСИЯ
+       --------------------------------------------------------- */
+    @media (max-width: 768px) {
+
+      html, body { overflow-x: hidden !important; }
+
+      body {
+        background: none !important;
+        background-attachment: scroll !important;
+      }
+
+      .mobile-bg {
+        display: block;
+        background-image: url("combined_reversed.jpg");
+      }
+
+      header { padding: 80px 12px !important; text-align:center !important; }
+
+      header p { margin: 0 auto 8px auto !important; }
+
+      header h1 {
+        font-size: clamp(28px, 10.5vw, 48px) !important;
+        margin: 0 auto !important;
+      }
+
+      .wrench-animation {
+        width:140px !important;
+        height:140px !important;
+        margin-top:18px !important;
+      }
+
+      .services {
+        flex-direction:column !important;
+        gap:18px !important;
+        align-items:center !important;
+      }
+
+      /* Мобильная карта */
+      #map-mobile {
+        display: block !important;
+        width: 100%;
+        margin: 20px auto;
+        border-radius: 12px;
+        aspect-ratio: 3/4;
+        overflow: hidden;
+      }
+
+      #map-mobile iframe { width: 100%; height: 100%; border: 0; }
+
+      /* Прячем ПК-карту */
+      #map-desktop { display: none !important; }
+      /* Красивое оформление контактов на мобильной версии */
+@media (max-width: 768px) {
+
+  .contact {
+    padding: 10px 5px !important;
+    text-align: center !important;
+  }
+
+  .contact p {
+    font-size: 18px !important;
+    line-height: 1.55 !important;
+    margin: 12px auto !important;
+    width: 95% !important;
+  }
+
+  .contact a {
+    display: inline-block !important;
+    color: #ff2a2a !important;
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    margin-top: 5px !important;
+    text-decoration: none !important;
+  }
+
+  .contact a:hover {
+    opacity: 0.8;
+  }
+
+  .hours {
+    margin-top: 20px !important;
+    font-size: 17px !important;
+    line-height: 1.6 !important;
+  }
+
+  .hours p {
+    margin: 6px 0 !important;
+  }
+}
+
+    }
+
+    /* ---------------------------------------------------------
+               🖥️ ПК ВОССТАНОВЛЕНИЕ ВЫРАВНИВАНИЯ
+       --------------------------------------------------------- */
+    @media (min-width: 769px) {
+      .contact,
+      .contact p,
+      .contact a,
+      .hours {
+        text-align: center !important;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    /* ----- HEADER ----- */
+    header {
+      text-align: center;
+      padding: 120px 20px;
+    }
+
+    header p {
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #ddd;
+      opacity: 0;
+      margin-top: 10px;
+      animation: fadeIn 1.5s ease forwards 0.8s;
+    }
+
+    header h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 90px;
+      color: #fff;
+      margin: 0;
+      letter-spacing: 3px;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: slideUpFade 1.6s ease forwards;
+      text-shadow: 0 0 25px #ff0000;
+    }
+
+    @keyframes slideUpFade {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* ----- Ключ ----- */
+    .wrench-animation {
+      margin-top: 100px;
+      width: 200px;
+      height: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.65));
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+    .wrench img { width: 100%; height: 100%; object-fit: contain; }
+
+    @keyframes spin { from { rotate:0deg; } to { rotate:360deg; } }
+
+    .wrench { animation: spin 6s linear infinite; }
+
+    /* ----- Sections ----- */
+    section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      font-family: "Orbitron", sans-serif;
+      font-size: 32px;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    }
+
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .service-card {
+      background: rgba(20,20,20,0.55);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      width: 300px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(255,0,0,0.3);
+      transition: 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      background-color: rgba(34,34,34,0.7);
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+    }
+
+    .service-card h3 { color: #ff1a1a; margin-bottom: 15px; }
+
+    /* Контакты */
+    .contact a {
+      color: #ff1a1a !important;
+      font-weight: 600;
+      text-shadow: none !important;
+    }
+
+    .contact a:hover { color: #ff3a3a !important; }
+
+    /* ПК карта */
+    #map-desktop {
+      display: block;
+      width: 100%;
+      max-width: 900px;
+      margin: 25px auto;
+      border-radius: 12px;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+
+    #map-desktop iframe { width: 100%; height:100%; border:0; }
+
+    /* Мобильная карта скрыта */
+    #map-mobile { display: none; }
+
+    footer {
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      color: #ccc;
+      margin-top: 60px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Мобильный фоновый слой -->
+  <div class="mobile-bg"></div>
+
+  <header>
+    <p>SERVICE</p>
+    <h1>GRAND THE AUTO</h1>
+    <div class="wrench-animation">
+      <div class="wrench">
+        <img src="wrench.png" alt="Ключ" />
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="services">
+      <h2>НАШИ УСЛУГИ</h2>
+
+      <div class="services">
+        <div class="service-card"><h3>Electrical System Repair</h3><p>Профессиональная диагностика и ремонт электрооборудования автомобиля.</p></div>
+        <div class="service-card"><h3>Tire Fitting</h3><p>Быстрая и аккуратная замена и балансировка шин.</p></div>
+        <div class="service-card"><h3>Transmission Service</h3><p>Проверка и обслуживание трансмиссий.</p></div>
+        <div class="service-card"><h3>Engine Diagnostic</h3><p>Полная диагностика двигателя на современном оборудовании.</p></div>
+        <div class="service-card"><h3>Suspension Repair</h3><p>Ремонт и замена элементов подвески.</p></div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <h2>КОНТАКТЫ</h2>
+
+      <p>
+        Телефон:
+        <a href="tel:+31643464292">+31 6 43 46 42 92</a> — мобильный<br />
+        <a href="https://wa.me/31639648685" target="_blank">+31 6 396 48685</a> — WhatsApp
+      </p>
+
+      <p>
+        Instagram:
+        <a href="https://www.instagram.com/gta_san_almere/" target="_blank">@gta_san_almere</a>
+      </p>
+
+      <div class="hours">
+        <p>Понедельник — Пятница: 10:00 – 19:00</p>
+        <p>Суббота: 10:00 – 17:00</p>
+        <p>Воскресенье: выходной</p>
+      </div>
+
+      <!-- ПК карта -->
+      <div id="map-desktop">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.373033862048!2d5.247678176626841!3d52.40442297208698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c61777fdc6bf1f%3A0x573dba4a0225fada!2sHefbrugweg%2012%2C%201332%20AN%20Almere%2C%20Netherlands!5e0!3m2!1sru!2snl!4v1706822222222!5m2!1sru!2snl"
+                loading="lazy" allowfullscreen></iframe>
+      </div>
+
+      <!-- Мобильная карта -->
+      <div id="map-mobile">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.373033862048!2d5.247678176626841!3d52.40442297208698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c61777fdc6bf1f%3A0x573dba4a0225fada!2sHefbrugweg%2012%2C%201332%20AN%20Almere%2C%20Netherlands!5e0!3m2!1sru!2snl!4v1706822222222!5m2!1sru!2snl"
+                loading="lazy" allowfullscreen></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2025 GRAND THE AUTO | Все права защищены</footer>
+
+  <script>
+    // движение фона на ПК
+    window.addEventListener("scroll", () => {
+      const yOffset = window.pageYOffset;
+      document.body.style.backgroundPositionY = -(yOffset * 0.2) + "px";
+    });
+  </script>
+
+</body>
+</html>
